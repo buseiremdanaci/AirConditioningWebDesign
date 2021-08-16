@@ -395,13 +395,13 @@ input[type=button]:focus{
                             </div>
                             <div class="modal-body">
                                 <form action="update.php" method="POST">
-                                <input type="text" name="model_no" id="model_no" placeholder="Model Numarası" class="yazi" />
+                                <input type="text" name="model_no" id="model_no" placeholder="Model Numarası" class="yazi" required/>
                                 <br>
-                                <input type="text" name="urun_adi" id="urun_adi" placeholder="Ürün Adı" class="yazi" />
+                                <input type="text" name="urun_adi" id="urun_adi" placeholder="Ürün Adı" class="yazi" required/>
                                 <br>
-                                <input type="text" name="stok_durum" id="stok_durum" placeholder="Stok Adet" class="yazi" />
+                                <input type="text" name="stok_durum" id="stok_durum" placeholder="Stok Adet" class="yazi" required/>
                                 <br>
-                                <input type="file" name="fotograf" id="fotograf" placeholder="Fotoğraf" class="yazi"  />
+                                <input type="file" name="fotograf" id="fotograf" placeholder="Fotoğraf" class="yazi"  required/>
                                 <br>
                                 <input type="submit" name="gonder" value="GÜNCELLE" class="buton" />
                                 <input type="reset" name="sil" value="TEMİZLE" class="buton" />
