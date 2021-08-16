@@ -83,7 +83,7 @@ input[type=button]:focus{
 
          border: 3px solid #1c7430 ;
      }
-		</style>
+</style>
 <meta charset="UTF-8">
 <!DOCTYPE html>
 <html lang="en">
@@ -96,7 +96,6 @@ input[type=button]:focus{
     <span class="navbar-toggler-icon"></span>
   </button>
   <a class="navbar-brand" href="#">AIR</a>
-
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
@@ -119,292 +118,263 @@ input[type=button]:focus{
   </div>
 </nav>
 </div>
+<header>
+    <div class="container-fluid" >
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-4 col" >
+                <figure class="highcharts-figure">
+                    <div id="container"></div>
+                </figure>
+                    <script type="text/javascript">
+                        Highcharts.chart('container', {
 
-<div class="container-fluid" id="altAlan">
-<div class="row">
-		 <div class="col-sm-12 col-md-12 col-lg-4 col" >
+                            title: {
+                                text: 'Yıllara Göre Ürün İstek Grafiği, 2010-2016'
+                            },
 
+                            subtitle: {
+                                text: 'www.aircondition.store'
+                            },
 
-<figure class="highcharts-figure">
-    <div id="container"></div>
-</figure>
+                            yAxis: {
+                                title: {
+                                    text: 'Satış Sayısı'
+                                }
+                            },
 
-		<script type="text/javascript">
-Highcharts.chart('container', {
+                            xAxis: {
+                                accessibility: {
+                                    rangeDescription: 'Range: 2010 to 2016'
+                                }
+                            },
 
-    title: {
-        text: 'Yıllara Göre Ürün İstek Grafiği, 2010-2016'
-    },
+                            legend: {
+                                layout: 'vertical',
+                                align: 'right',
+                                verticalAlign: 'middle'
+                            },
 
-    subtitle: {
-        text: 'www.aircondition.store'
-    },
+                            plotOptions: {
+                                series: {
+                                    label: {
+                                        connectorAllowed: false
+                                    },
+                                    pointStart: 2010
+                                }
+                            },
 
-    yAxis: {
-        title: {
-            text: 'Satış Sayısı'
-        }
-    },
+                            series: <?=$json_data?>,
 
-    xAxis: {
-        accessibility: {
-            rangeDescription: 'Range: 2010 to 2016'
-        }
-    },
+                            responsive: {
+                                rules: [{
+                                    condition: {
+                                        maxWidth: 500
+                                    },
+                                    chartOptions: {
+                                        legend: {
+                                            layout: 'horizontal',
+                                            align: 'center',
+                                            verticalAlign: 'bottom'
+                                        }
+                                    }
+                                }]
+                            }
 
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-    },
+                        });
+                    </script>
+                 </div>
+            <div class="col-sm-12 col-md-12 col-lg-4 col" >
+                <figure class="highcharts-figure">
+                    <div id="container2"></div>
+                </figure>
+                    <script type="text/javascript">
 
-    plotOptions: {
-        series: {
-            label: {
-                connectorAllowed: false
-            },
-            pointStart: 2010
-        }
-    },
+                        var categories = [
+                            '0-4', '5-9', '10-14', '15-19',
+                            '20-24', '25-29', '30-34', '35-39', '40-44',
+                            '45-49', '50-54', '55-59', '60-64', '65-69',
+                            '70-74', '75-79', '80-84', '85-89', '90-94',
+                            '95-99', '100 + '
+                        ];
 
-    series: <?=$json_data?>,
+                        Highcharts.chart('container2', {
+                            chart: {
+                                type: 'bar'
+                            },
+                            title: {
+                                text: 'Ürün İstek Piramidi, 2021'
+                            },
+                            subtitle: {
+                                text: 'www.aircondition.store'
+                            },
+                            accessibility: {
+                                point: {
+                                    valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
+                                }
+                            },
+                            xAxis: [{
+                                categories: categories,
+                                reversed: false,
+                                labels: {
+                                    step: 1
+                                },
+                                accessibility: {
+                                    description: 'Age (male)'
+                                }
+                            }, { // mirror axis on right side
+                                opposite: true,
+                                reversed: false,
+                                categories: categories,
+                                linkedTo: 0,
+                                labels: {
+                                    step: 1
+                                },
+                                accessibility: {
+                                    description: 'Age (female)'
+                                }
+                            }],
+                            yAxis: {
+                                title: {
+                                    text: null
+                                },
+                                labels: {
+                                    formatter: function () {
+                                        return Math.abs(this.value) + '%';
+                                    }
+                                },
+                                accessibility: {
+                                    description: 'Percentage population',
+                                    rangeDescription: 'Range: 0 to 5%'
+                                }
+                            },
 
-    responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 500
-            },
-            chartOptions: {
-                legend: {
-                    layout: 'horizontal',
-                    align: 'center',
-                    verticalAlign: 'bottom'
-                }
-            }
-        }]
-    }
+                            plotOptions: {
+                                series: {
+                                    stacking: 'normal'
+                                }
+                            },
 
-});
-		</script>
+                            tooltip: {
+                                formatter: function () {
+                                    return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' +
+                                        'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) + '%';
+                                }
+                            },
 
-		 </div>
-		  <div class="col-sm-12 col-md-12 col-lg-4 col" >
+                            series: <?=$json_data?>,
+                        });
 
-<figure class="highcharts-figure">
-    <div id="container2"></div>
-</figure>
+                    </script>
+                </div>
+            <div class="col-sm-12 col-md-12 col-lg-4 col" >
+                <figure class="highcharts-figure">
+                    <div id="container3"></div>
+                </figure><br><br>
+                    <script type="text/javascript">
+                        var pieColors = (function () {
+                            var colors = [],
+                                base = Highcharts.getOptions().colors[0],
+                                i;
 
-
-		<script type="text/javascript">
-// Data gathered from http://populationpyramid.net/germany/2015/
-
-// Age categories
-var categories = [
-    '0-4', '5-9', '10-14', '15-19',
-    '20-24', '25-29', '30-34', '35-39', '40-44',
-    '45-49', '50-54', '55-59', '60-64', '65-69',
-    '70-74', '75-79', '80-84', '85-89', '90-94',
-    '95-99', '100 + '
-];
-
-Highcharts.chart('container2', {
-    chart: {
-        type: 'bar'
-    },
-    title: {
-        text: 'Ürün İstek Piramidi, 2021'
-    },
-    subtitle: {
-        text: 'www.aircondition.store'
-    },
-    accessibility: {
-        point: {
-            valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
-        }
-    },
-    xAxis: [{
-        categories: categories,
-        reversed: false,
-        labels: {
-            step: 1
-        },
-        accessibility: {
-            description: 'Age (male)'
-        }
-    }, { // mirror axis on right side
-        opposite: true,
-        reversed: false,
-        categories: categories,
-        linkedTo: 0,
-        labels: {
-            step: 1
-        },
-        accessibility: {
-            description: 'Age (female)'
-        }
-    }],
-    yAxis: {
-        title: {
-            text: null
-        },
-        labels: {
-            formatter: function () {
-                return Math.abs(this.value) + '%';
-            }
-        },
-        accessibility: {
-            description: 'Percentage population',
-            rangeDescription: 'Range: 0 to 5%'
-        }
-    },
-
-    plotOptions: {
-        series: {
-            stacking: 'normal'
-        }
-    },
-
-    tooltip: {
-        formatter: function () {
-            return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' +
-                'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) + '%';
-        }
-    },
-
-    series: <?=$json_data?>,
-});
-
-		</script>
-
-
-
-
-		  </div>
-		   <div class="col-sm-12 col-md-12 col-lg-4 col" >
-
-
-<figure class="highcharts-figure">
-    <div id="container3"></div>
-</figure><br><br>
-
-
-
-		<script type="text/javascript">
-// Make monochrome colors
-var pieColors = (function () {
-    var colors = [],
-        base = Highcharts.getOptions().colors[0],
-        i;
-
-    for (i = 0; i < 10; i += 1) {
-        // Start out with a darkened base color (negative brighten), and end
-        // up with a much brighter color
-        colors.push(Highcharts.color(base).brighten((i - 3) / 7).get());
-    }
-    return colors;
-}());
-
-// Build the chart
-Highcharts.chart('container3', {
-    chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-    },
-    title: {
-        text: 'Ürün Pazar Payları, 2021'
-    },
-    subtitle: {
-        text: 'www.aircondition.store'
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    accessibility: {
-        point: {
-            valueSuffix: '%'
-        }
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            colors: pieColors,
-            dataLabels: {
-                enabled: true,
-                format: '<b>{point.name}</b><br>{point.percentage:.1f} %',
-                distance: -50,
-                filter: {
-                    property: 'percentage',
-                    operator: '>',
-                    value: 4
-                }
-            }
-        }
-    },
-    series:<?=$json_data?>,
-});
-		</script>
-
- </div>
-
-
-		 </div>
-</div>
-
-
-
-
-
+                            for (i = 0; i < 10; i += 1) {
+                                colors.push(Highcharts.color(base).brighten((i - 3) / 7).get());
+                            }
+                            return colors;
+                        }());
+                        Highcharts.chart('container3', {
+                            chart: {
+                                plotBackgroundColor: null,
+                                plotBorderWidth: null,
+                                plotShadow: false,
+                                type: 'pie'
+                            },
+                            title: {
+                                text: 'Ürün Pazar Payları, 2021'
+                            },
+                            subtitle: {
+                                text: 'www.aircondition.store'
+                            },
+                            tooltip: {
+                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                            },
+                            accessibility: {
+                                point: {
+                                    valueSuffix: '%'
+                                }
+                            },
+                            plotOptions: {
+                                pie: {
+                                    allowPointSelect: true,
+                                    cursor: 'pointer',
+                                    colors: pieColors,
+                                    dataLabels: {
+                                        enabled: true,
+                                        format: '<b>{point.name}</b><br>{point.percentage:.1f} %',
+                                        distance: -50,
+                                        filter: {
+                                            property: 'percentage',
+                                            operator: '>',
+                                            value: 4
+                                        }
+                                    }
+                                }
+                            },
+                            series:<?=$json_data?>,
+                        });
+                    </script>
+                </div>
+            </div>
+    </div>
+</header>
     <?php
       $db = new PDO("mysql:host=localhost;dbname=uyelik;charset=utf8","root","123456");
        $query = $db->query("select * from urun");
     ?>
+<article>
       <div class="container-fluid">
           <div class="row">
-
-           <div class="col col-sm-12 col-md-12 col-lg-12">
-                <h3 style="text-align:center;">ÜRÜN LİSTESİ</h3>
-                <br>
-               <div class="table-responsive">
-                   <table id="veri" class="table table-striped table-bordered">
-                     <thead>
-                     <tr>
-                     <td><h5>MODEL NUMARASI</h5></td>
-                     <td><h5>ÜRÜN ADI</h5></td>
-                     <td><h5>STOK DURUMU</h5></td>
-                     <td><h5>GÖRSEL</h5></td>
-                     <td></td><td></td><td></td>
-                     </tr>
-                     </thead>
-                      <?php
-                         foreach($query as $row) {
-                            ?>
-                            <tr>
-                            <td><?php echo $row["model_no"];?></td>
-                            <td><?php echo $row["urun_adi"];?></td>
-                            <td><?php echo $row["stok_durum"];?></td>
-                            <td><?php echo $row["fotograf"];?></td>
-                             <td> <button type="button" class="btn btn-primary buton2" data-toggle="modal" data-target="#guncelle" style="background-color: rgb(15, 72, 127);width: 150px;">
-					GÜNCELLE
-				</button></td>
-                             <td> <button type="button" class="btn btn-primary buton2" data-toggle="modal" data-target="#ekle" style="background-color: rgb(15, 72, 127);width: 150px">
-					EKLE
-				</button></td>
-                             <td><button type="button" class="btn btn-primary buton2" data-toggle="modal" data-target="#sil" style="background-color: rgb(15, 72, 127);width: 150px">
-					SİL
-				</button> </td>
-                            </tr>
-                            <?php
-                         }
-                       ?>
-                   </table>
-               </div>
-          </div>
-        </div>
+               <div class="col col-sm-12 col-md-12 col-lg-12">
+                    <h3 style="text-align:center;">ÜRÜN LİSTESİ</h3>
+                    <br>
+                   <div class="table-responsive">
+                       <table id="veri" class="table table-striped table-bordered">
+                         <thead>
+                         <tr>
+                         <td><h5>MODEL NUMARASI</h5></td>
+                         <td><h5>ÜRÜN ADI</h5></td>
+                         <td><h5>STOK DURUMU</h5></td>
+                         <td><h5>GÖRSEL</h5></td>
+                         <td></td><td></td><td></td>
+                         </tr>
+                         </thead>
+                          <?php
+                             foreach($query as $row) {
+                                ?>
+                                <tr>
+                                <td><?php echo $row["model_no"];?></td>
+                                <td><?php echo $row["urun_adi"];?></td>
+                                <td><?php echo $row["stok_durum"];?></td>
+                                <td><?php echo $row["fotograf"];?></td>
+                                 <td> <button type="button" class="btn btn-primary buton2" data-toggle="modal" data-target="#guncelle" style="background-color: rgb(15, 72, 127);width: 150px;">
+                        GÜNCELLE
+                    </button></td>
+                                 <td> <button type="button" class="btn btn-primary buton2" data-toggle="modal" data-target="#ekle" style="background-color: rgb(15, 72, 127);width: 150px">
+                        EKLE
+                    </button></td>
+                                 <td><button type="button" class="btn btn-primary buton2" data-toggle="modal" data-target="#sil" style="background-color: rgb(15, 72, 127);width: 150px">
+                        SİL
+                    </button> </td>
+                                </tr>
+                                <?php
+                             }
+                           ?>
+                       </table>
+                   </div>
+              </div>
+      </div>
   </div>
-    <script>
+  </article>
+  <script>
           $(function() {
              $("#veri").DataTable({
                    language: {
@@ -412,35 +382,36 @@ Highcharts.chart('container3', {
                    }
              });
           });
-    </script>
-    <nav class="modal fade" id="guncelle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">Ürün Güncelle</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-                    <form action="update.php" method="POST">
-                    <input type="text" name="model_no" id="model_no" placeholder="Model Numarası" class="yazi" />
-                    <br>
-                    <input type="text" name="urun_adi" id="urun_adi" placeholder="Ürün Adı" class="yazi" />
-                    <br>
-                    <input type="text" name="stok_durum" id="stok_durum" placeholder="Stok Adet" class="yazi" />
-                    <br>
-                    <input type="file" name="fotograf" id="fotograf" placeholder="Fotoğraf" class="yazi"  />
-                    <br>
-                    <input type="submit" name="gonder" value="GÜNCELLE" class="buton" />
-                    <input type="reset" name="sil" value="TEMİZLE" class="buton" />
-                    </form>
-						</div>
-					</div>
-				</div>
-			</nav>
-
-
+  </script>
+    <section>
+        <nav class="modal fade" id="guncelle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Ürün Güncelle</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="update.php" method="POST">
+                                <input type="text" name="model_no" id="model_no" placeholder="Model Numarası" class="yazi" />
+                                <br>
+                                <input type="text" name="urun_adi" id="urun_adi" placeholder="Ürün Adı" class="yazi" />
+                                <br>
+                                <input type="text" name="stok_durum" id="stok_durum" placeholder="Stok Adet" class="yazi" />
+                                <br>
+                                <input type="file" name="fotograf" id="fotograf" placeholder="Fotoğraf" class="yazi"  />
+                                <br>
+                                <input type="submit" name="gonder" value="GÜNCELLE" class="buton" />
+                                <input type="reset" name="sil" value="TEMİZLE" class="buton" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+    </section>
+    <section>
 			<nav class="modal fade" id="ekle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -451,24 +422,24 @@ Highcharts.chart('container3', {
 							</button>
 						</div>
 						<div class="modal-body">
-                    <form action="kayit.php" method="POST">
-                    <input type="text" name="model_no" id="model_no" placeholder="Model Numarası" class="yazi" required/>
-                    <br>
-                    <input type="text" name="urun_adi" id="urun_adi" placeholder="Ürün Adı" class="yazi" required/>
-                    <br>
-                    <input type="text" name="stok_durum" id="stok_durum" placeholder="Stok Adet" class="yazi" required/>
-                    <br>
-                    <input type="file" name="fotograf" id="fotograf" placeholder="Fotoğraf" class="yazi" required />
-                    <br>
-                    <input type="submit" name="gonder" value="EKLE" class="buton" />
-                    <input type="reset" name="sil" value="TEMİZLE" class="buton" />
-                    </form>
+                            <form action="kayit.php" method="POST">
+                            <input type="text" name="model_no" id="model_no" placeholder="Model Numarası" class="yazi" required/>
+                            <br>
+                            <input type="text" name="urun_adi" id="urun_adi" placeholder="Ürün Adı" class="yazi" required/>
+                            <br>
+                            <input type="text" name="stok_durum" id="stok_durum" placeholder="Stok Adet" class="yazi" required/>
+                            <br>
+                            <input type="file" name="fotograf" id="fotograf" placeholder="Fotoğraf" class="yazi" required />
+                            <br>
+                            <input type="submit" name="gonder" value="EKLE" class="buton" />
+                            <input type="reset" name="sil" value="TEMİZLE" class="buton" />
+                            </form>
 						</div>
 					</div>
 				</div>
 			</nav>
-
-
+    </section>
+    <section>
 				<nav class="modal fade" id="sil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -479,15 +450,16 @@ Highcharts.chart('container3', {
 							</button>
 						</div>
 						<div class="modal-body">
-                    <form action="sil.php" method="POST">
-                    <input type="text" name="model_no" id="model_no" placeholder="Model Numarası" class="yazi" required/>
-                    <br>
-                    <input type="submit" name="gonder" value="SİL" class="buton" />
-                    <input type="reset" name="sil" value="TEMİZLE" class="buton" />
-                    </form><br>
+                            <form action="sil.php" method="POST">
+                            <input type="text" name="model_no" id="model_no" placeholder="Model Numarası" class="yazi" required/>
+                            <br>
+                            <input type="submit" name="gonder" value="SİL" class="buton" />
+                            <input type="reset" name="sil" value="TEMİZLE" class="buton" />
+                            </form><br>
 						</div>
 					</div>
 				</div>
 			</nav>
+    </section>
 </body>
 </html>
