@@ -186,12 +186,13 @@ $personellist=$sorgu-> fetchAll(PDO::FETCH_OBJ);//object olarak verilerimizi çe
 			  <li><a href="iletisim.html">İletişim</a></li>
 			</ul>
     	</div>
+
         <div class="col-sm-6 col-md-6 col-lg-3 col" >
 		   <h5>İletişim</h5></br>
 				<h6>Adres</h6>
-				<a>Yavuz Sultan Selim Mh. Mevlana Cd. No:192 A-4 Blok, KörfezKent 2.Etap Site Yönetimi Ofisi, 41780 Körfez/Kocaeli</a><br>
+				<a>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the ind</a><br>
 				<h6>Telefon Numarası</h6>
-				<a>0(530) 651 98 41</a>
+				<a>0(000) 000 00 00</a>
     	</div>
 		<div class="col-sm-6 col-md-6 col-lg-3 col" >
 		   <h5>Sosyal Medya</h5>
